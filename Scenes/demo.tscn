@@ -1,0 +1,546 @@
+[gd_scene load_steps=29 format=3 uid="uid://depwl7ntoyv7j"]
+
+[ext_resource type="Script" path="res://Scripts/EnemySpawner.gd" id="1_c1od2"]
+[ext_resource type="Script" path="res://Scripts/demo.gd" id="1_ejclb"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_elqom"]
+[ext_resource type="AudioStream" uid="uid://cd6685xjbeq7q" path="res://Assets/sfx/upgrade.mp3" id="2_xuh6i"]
+[ext_resource type="Texture2D" uid="uid://5t4f74aqj6an" path="res://Assets/characters.png" id="3_iokt1"]
+[ext_resource type="Texture2D" uid="uid://d1vrlhcmfchvt" path="res://Assets/ritual.png" id="3_jjw4m"]
+[ext_resource type="Script" path="res://Scripts/Ritual.gd" id="3_uu27m"]
+[ext_resource type="Script" path="res://Scripts/upgrade_sound.gd" id="3_yqoip"]
+[ext_resource type="Script" path="res://Scripts/SummonerMark.gd" id="5_udqu4"]
+[ext_resource type="Script" path="res://Scripts/GoldLabel.gd" id="7_0yphp"]
+[ext_resource type="Script" path="res://Scripts/Power.gd" id="9_gq4re"]
+[ext_resource type="Texture2D" uid="uid://cqhcgtksp1vkc" path="res://Assets/grass.png" id="9_ppe4w"]
+[ext_resource type="Texture2D" uid="uid://f40b1v0ndwy5" path="res://Assets/stone.png" id="10_onl0h"]
+[ext_resource type="AudioStream" uid="uid://cemnjful7w5j5" path="res://Assets/sfx/music.mp3" id="12_a22ty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1agjj"]
+size = Vector2(3387, 315.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnvag"]
+size = Vector2(604, 2862.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6ggj"]
+size = Vector2(24, 22)
+
+[sub_resource type="Animation" id="Animation_yb61n"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orientation/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_h0pyi"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Sprite2D:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.2, -0.25, 0, 0.25, 0, 0.19, -0.25, 0, 0.25, 0, 0.2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Sprite2D:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.2, -0.25, 0, 0.25, 0, 0.19, -0.25, 0, 0.25, 0, 0.2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orientation/Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Orientation/Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Orientation/Sprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_8dhs3"]
+resource_name = "walk"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1.2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orientation/Sprite2D:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.2, -0.25, 0, 0.25, 0, 0.18, -0.25, 0, 0.25, 0, 0.2, -0.25, 0, 0.25, 0, 0.18, -0.25, 0, 0.25, 0, 0.2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Orientation/Sprite2D:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Orientation/Sprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.0872665, -0.25, 0, 0.25, 0, 0.0872665, -0.25, 0, 0.25, 0, -0.0872665, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1.2)
+}
+
+[sub_resource type="Animation" id="Animation_fv3xp"]
+resource_name = "die"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"prompt_restart"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4rx2u"]
+_data = {
+"RESET": SubResource("Animation_yb61n"),
+"die": SubResource("Animation_fv3xp"),
+"idle": SubResource("Animation_h0pyi"),
+"walk": SubResource("Animation_8dhs3")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgh2h"]
+bg_color = Color(1, 1, 1, 1)
+corner_detail = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qheih"]
+bg_color = Color(0.788235, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm6pc"]
+atlas = ExtResource("3_jjw4m")
+region = Rect2(534.22, 716.066, 900.029, 995.997)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ektos"]
+size = Vector2(407, 357)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxlid"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.596078)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2ypr"]
+bg_color = Color(0.760784, 0, 0, 1)
+
+[node name="Demo" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_ejclb")
+
+[node name="upgrade_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xuh6i")
+script = ExtResource("3_yqoip")
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("1_c1od2")
+
+[node name="Area2D" type="Area2D" parent="EnemySpawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawner/Area2D"]
+position = Vector2(1989.5, 237)
+shape = SubResource("RectangleShape2D_1agjj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="EnemySpawner/Area2D"]
+position = Vector2(1992, 2788)
+shape = SubResource("RectangleShape2D_1agjj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="EnemySpawner/Area2D"]
+position = Vector2(-15, 1487.38)
+shape = SubResource("RectangleShape2D_jnvag")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="EnemySpawner/Area2D"]
+position = Vector2(3990, 1525)
+shape = SubResource("RectangleShape2D_jnvag")
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("HP_HUD_BAR") groups=["allies"]]
+z_index = 1
+texture_filter = 2
+position = Vector2(1858, 1450)
+collision_mask = 7
+motion_mode = 1
+floor_stop_on_slope = false
+platform_on_leave = 2
+platform_floor_layers = 4294967040
+script = ExtResource("1_elqom")
+HP_HUD_BAR = NodePath("../CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/HPBar")
+SPEED = 300.0
+
+[node name="Orientation" type="Node2D" parent="Player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Orientation"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_iokt1")
+region_enabled = true
+region_rect = Rect2(1198.82, 471.165, 570.443, 676.736)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, 57)
+shape = SubResource("RectangleShape2D_f6ggj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_4rx2u")
+}
+autoplay = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ProgressBar" type="ProgressBar" parent="Player"]
+texture_filter = 1
+offset_left = -44.0
+offset_top = -76.0
+offset_right = 34.0
+offset_bottom = -71.0
+theme_override_styles/background = SubResource("StyleBoxFlat_rgh2h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qheih")
+value = 50.0
+show_percentage = false
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="Player"]
+
+[node name="Ritual" type="Node2D" parent="."]
+position = Vector2(2023.31, 1508)
+scale = Vector2(2, -2)
+script = ExtResource("3_uu27m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ritual"]
+rotation = 2.28464
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_jm6pc")
+
+[node name="SpawnPosition" type="Marker2D" parent="Ritual"]
+position = Vector2(0, -4)
+
+[node name="SummonerMarks" type="Node2D" parent="Ritual"]
+
+[node name="Marker2D" type="Marker2D" parent="Ritual/SummonerMarks" groups=["summoner_spots"]]
+position = Vector2(-118.5, 191)
+scale = Vector2(2, -2)
+script = ExtResource("5_udqu4")
+DIRECTION = "RIGHT"
+
+[node name="Marker2D2" type="Marker2D" parent="Ritual/SummonerMarks" groups=["summoner_spots"]]
+position = Vector2(138, 189)
+scale = Vector2(2, -2)
+script = ExtResource("5_udqu4")
+
+[node name="Marker2D3" type="Marker2D" parent="Ritual/SummonerMarks" groups=["summoner_spots"]]
+position = Vector2(-247.5, -48)
+scale = Vector2(2, -2)
+script = ExtResource("5_udqu4")
+DIRECTION = "RIGHT"
+
+[node name="Marker2D4" type="Marker2D" parent="Ritual/SummonerMarks" groups=["summoner_spots"]]
+position = Vector2(207, -84)
+scale = Vector2(2, -2)
+script = ExtResource("5_udqu4")
+
+[node name="Marker2D5" type="Marker2D" parent="Ritual/SummonerMarks" groups=["summoner_spots"]]
+position = Vector2(-3, -235.5)
+scale = Vector2(2, -2)
+script = ExtResource("5_udqu4")
+
+[node name="Area" type="Area2D" parent="Ritual"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ritual/Area"]
+position = Vector2(-18.6563, -8.5)
+shape = SubResource("RectangleShape2D_ektos")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(240, 24)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_yxlid")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w2ypr")
+show_percentage = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Gold" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Gold"
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.631373, 0.631373, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "100"
+script = ExtResource("7_0yphp")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Power" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Power"
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.647059, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 24
+text = "50"
+script = ExtResource("9_gq4re")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 170)
+layout_mode = 2
+text = "Controls:
+WASD - Movement
+Left Mouse Click - Attack
+R - Hire cultist - 100g
+T - Upgrade power - 50g
+Y - Full heal - 200g
+Z - Mute/Unmute"
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Grass" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(1366, 1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass2" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(-1366, 1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass3" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(-1366, -1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass4" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(1366, -1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass5" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(6830, 1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass6" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(4098, 1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass7" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(4098, -1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass8" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(6830, -1024)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass9" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(1366, 5120)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass10" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(-1366, 5120)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass11" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(-1366, 3072)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass12" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(1366, 3072)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass13" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(6830, 5120)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass14" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(4098, 5120)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass15" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(4098, 3072)
+texture = ExtResource("9_ppe4w")
+
+[node name="Grass16" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(6830, 3072)
+texture = ExtResource("9_ppe4w")
+
+[node name="Stone" type="Sprite2D" parent="CanvasGroup"]
+z_index = -1
+position = Vector2(2017.31, 1522)
+scale = Vector2(1.13073, 1.02395)
+texture = ExtResource("10_onl0h")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_a22ty")
+volume_db = -5.0
+autoplay = true
